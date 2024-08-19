@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,15 +17,19 @@ import AdminSucursales from "./components/Administrador/admin-sucursales";
 import Product from "./components/Usuarios/products";
 import About from "./components/about";
 import ProtectedRoute from "./components/Rutas/ProtectedRoute";
+import Pedido from "./components/Usuarios/pedido";
+import MisPedidos from "./components/Usuarios/verMisPedidos";
+import AdminPedidos from "./components/Administrador/admin-pedidos";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn"); // Check if logged in
   const userType = window.localStorage.getItem("userType");
+  const [numeroPendientes,setNumeroPendientes] = useState(userType==="Admin" ? 0:null);
 
   return (
     <Router>
       <div className="App">
-        <Navbar isLoggedIn={isLoggedIn} userType={userType} />
+        <Navbar isLoggedIn={isLoggedIn} userType={userType} pendientes={numeroPendientes}/>
 
         <Routes>
           {/* unauthorized route */}
@@ -49,6 +53,8 @@ function App() {
                 <Route path="/admin-dashboard" element={<Navigate to="/" />}/>
                 <Route path="/usuarios" element={<Navigate to="/" />} />
                 <Route path="/sucursales" element={<Navigate to="/"  />} />
+                <Route path="/nuevoPedido" element={<Pedido />} />
+                <Route path="/misPedidos" element={<MisPedidos />}/>
               </>
             ) : (
               <>
@@ -58,6 +64,7 @@ function App() {
                 <Route path="/admin-dashboard" element={<AdminHome />} />
                 <Route path="/usuarios" element={<AdminUsuarios />} />
                 <Route path="/sucursales" element={<AdminSucursales />} />
+                <Route path="/pedidos" element={<AdminPedidos setNumeroPendientes={setNumeroPendientes}/>}/>
               </>
             )}
           </Route>

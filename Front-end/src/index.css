@@ -83,11 +83,11 @@ html,
   color: #167bff;
 }
 
-table,
+/*table,
 th,
 td {
   border: 1px solid black !important;
-}
+}*/
 
 /* Navbar styles */
 .navbar {

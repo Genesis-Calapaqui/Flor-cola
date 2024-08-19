@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 
-function Navbar({ isLoggedIn, userType }) {
+function Navbar({ isLoggedIn, userType,pendientes }) {
   
   //logout
   const logOut = () => {
@@ -67,6 +67,32 @@ function Navbar({ isLoggedIn, userType }) {
             Acerca de
           </Link>
         </li>
+
+        {isLoggedIn && userType !== 'Admin' &&
+          <li>
+            <Link to="/misPedidos" className="nav-link">
+              Mis pedidos
+            </Link>
+          </li>
+        }
+        
+        {isLoggedIn && userType !== 'Admin' && 
+          <li>
+            <button className="btn btn-primary">
+              <Link to="/nuevoPedido" className="nav-link">
+                Realizar pedido
+              </Link>
+            </button>
+          </li>
+        }
+
+        {isLoggedIn && userType === 'Admin' &&
+          <li>
+            <Link to="/pedidos" className="nav-link">
+              Administrar pedidos ({pendientes})
+            </Link>
+        </li>
+        }
 
         {isLoggedIn && (
           <li className="nav-item nav-item-logout">
