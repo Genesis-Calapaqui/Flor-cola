@@ -20,6 +20,7 @@ import ProtectedRoute from "./components/Rutas/ProtectedRoute";
 import Pedido from "./components/Usuarios/pedido";
 import MisPedidos from "./components/Usuarios/verMisPedidos";
 import AdminPedidos from "./components/Administrador/admin-pedidos";
+import AdminProducts from "./components/Administrador/admin-products";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn"); // Check if logged in
@@ -65,6 +66,7 @@ function App() {
                 <Route path="/usuarios" element={<AdminUsuarios />} />
                 <Route path="/sucursales" element={<AdminSucursales />} />
                 <Route path="/pedidos" element={<AdminPedidos setNumeroPendientes={setNumeroPendientes}/>}/>
+                <Route path="/admin-products" element={<AdminProducts />} />
               </>
             )}
           </Route>

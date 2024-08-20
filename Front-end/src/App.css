@@ -178,17 +178,30 @@
   margin-left: auto; /* Push logout button to the right end */
 }
 
-.btn-primary {
-  background-color: #007bff; /* Primary button background color */
-  color: white; /* Text color for button */
-  border: none; /* Remove border from button */
-  padding: 10px 20px; /* Padding inside button */
-  cursor: pointer; /* Pointer cursor on hover */
+.nav-item.active .nav-link {
+  background-color: #005dc0; /* Color de fondo para el elemento activo */
+  color: white; /* Color del texto para el elemento activo */
+  border-radius: 5px; /* Opcional: añadir bordes redondeados */
+}
+
+.nav-item:hover .nav-link {
+  background-color: #0056b3; /* Color de fondo al pasar el cursor */
+  color: white; /* Color del texto al pasar el cursor */
+  border-radius: 5px; /* Opcional: añadir bordes redondeados */
+}
+
+
+/*.btn-primary {
+  background-color: #007bff; 
+  color: white; 
+  border: none;
+  padding: 10px 20px; 
+  cursor: pointer;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Darker background on hover */
-}
+  background-color: #0056b3;
+}*/
 
 
 @keyframes App-logo-spin {

@@ -21,13 +21,27 @@ const {
     cancelarPedido
 } = require('../controllers/pedidos.controller');
 
+const {
+    addProduct,
+    getAllProducts,
+    getProductById,
+    updateProduct,
+    deleteProduct
+} = require('../controllers/productos.controller');
+
+// RUTAS PRODUCTOS
+router.post('/addProduct', addProduct);
+router.get('/getAllProducts', getAllProducts);
+router.get('/getProduct/:id', getProductById);
+router.post('/updateProduct/:id', updateProduct);
+router.delete('/deleteProduct/:id', deleteProduct);
+
 // USUARIOS
 router.post('/register', registerUser);
 router.post('/login-user', loginUser);
 router.post('/userData', getUserData);
 router.post('/deleteUser', deleteUser);
 router.get('/getAllUser', getAllUsers);
-
 
 // Rutas para SUCURSAL
 router.post('/createSucursal', createSucursal);

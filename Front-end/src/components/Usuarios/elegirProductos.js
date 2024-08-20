@@ -10,55 +10,39 @@ export default function ElegirProductos({onContinue}) {
     const navigate = useNavigate();
 
     useEffect(() => {
-
-        setProductList([
-            {
-                id_producto: 1,
-                tipo: "Rose",
-                variedad: "Alba",
-                color: "White",
-                descripcion: "White",
-                top_picture: "https://tessacorporation.com/wp-content/uploads/2017/10/Alba-3.jpg",
-                side_picture: "https://floramarket.es/wp-content/uploads/2022/03/rosa-alba-1.png",
-                longitud_disponible_cm_: "50 to 90",
-                tiempo_de_vida_dias_: "14-18",
-                tamano_flor: 6.5,
-                espinas: 1,
-                petalos_por_flor: 47,
-                stock: 81
-            },
-            {
-                id_producto: 2,
-                tipo: "Rose",
-                variedad: "Altamira",
-                color: "Novelty",
-                descripcion: "Cherry/Red",
-                top_picture: "https://www.staroses.com/wp-content/uploads/2020/02/altamira2-1.jpg",
-                side_picture: "https://www.staroses.com/wp-content/uploads/2020/02/altamira2-1.jpg",
-                longitud_disponible_cm_: "40 to 70",
-                tiempo_de_vida_dias_: "16-20",
-                tamano_flor: 5.8,
-                espinas: 1,
-                petalos_por_flor: 56,
-                stock: 61
-            },
-            {
-                id_producto: 3,
-                tipo: "Rose",
-                variedad: "Amorosa",
-                color: "Pink",
-                descripcion: "Medium Pink",
-                top_picture: "https://297820.selcdn.ru/crm1/images/species/4144.jpg?=2023-12-01+06%3A28%3A39",
-                side_picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9akiiFj_LJvhjSodQjLh6eTd37YmykH6xnm-M6eDaeohen-7RuR4pHXHW19Y4514q4o&usqp=CAU",
-                longitud_disponible_cm_: "60 to 90",
-                tiempo_de_vida_dias_: "16-20",
-                tamano_flor: 6.8,
-                espinas: 1,
-                petalos_por_flor: 52,
-                stock: 131
+        // Realizar la solicitud al backend para obtener los productos
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/getAllProducts'); // Ajusta el endpoint según la ruta que tengas
+                const data = await response.json();
+                if (data.status === "ok") {
+                    // Convertir los nombres de las propiedades al formato deseado
+                    const formattedData = data.data.map(product => ({
+                        id_producto: product.ID_PRODUCTO,
+                        tipo: product.TIPO,
+                        variedad: product.VARIEDAD,
+                        color: product.COLOR,
+                        descripcion: product.DESCRIPCION,
+                        top_picture: product.TOP_PICTURE,
+                        side_picture: product.SIDE_PICTURE,
+                        longitud_disponible_cm: product.LONGITUD_DISPONIBLE_CM_,
+                        tiempo_de_vida_dias: product.TIEMPO_DE_VIDA_DIAS_,
+                        tamano_flor: product.TAMANO_FLOR,
+                        espinas: product.ESPINAS,
+                        petalos_por_flor: product.PETALOS_POR_FLOR,
+                        stock: product.STOCK
+                    }));
+                    setProductList(formattedData); // Actualizar el estado con los datos formateados
+                } else {
+                    console.error("Error al obtener los productos:", data.data);
+                }
+            } catch (error) {
+                console.error("Error en la solicitud al servidor:", error);
             }
-        ]);
-    }, [])
+        };
+
+        fetchProducts();
+    }, []);
 
     const handleSelected = (prod) => {
         setSelectedList((prevProds) => {
